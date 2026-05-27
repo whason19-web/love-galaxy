@@ -25,37 +25,37 @@ const BENEDETTI_QUOTES = [
 const DEFAULT_PHOTOS = [
   {
     id: 1,
-    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto1.jpeg",
+    url: "/love-galaxy-netlify/client/public/fotos/foto1.jpeg",
     title: "Manos entrelazadas",
     quote: "Aprender cómo sos, quererte como sos."
   },
   {
     id: 2,
-    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto2.jpeg",
+    url: "/love-galaxy-netlify/client/public/fotos/foto2.jpeg",
     title: "Miradas que hablan",
     quote: "Te quiero como para escuchar tu risa toda la noche."
   },
   {
     id: 3,
-    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto3.jpeg",
+    url: "/love-galaxy-netlify/client/public/fotos/foto3.jpeg",
     title: "Tu sonrisa",
     quote: "Mi estrategia es que por fin me necesites."
   },
   {
     id: 4,
-    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto4.jpeg",
+    url: "/love-galaxy-netlify/client/public/fotos/foto4.jpeg",
     title: "Bajo las estrellas",
     quote: "Cinco minutos bastan para vivir una vida entera."
   },
   {
     id: 5,
-    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto5.jpeg",
+    url: "/love-galaxy-netlify/client/public/fotos/foto5.jpeg",
     title: "Abrazo cálido",
     quote: "De dos cosas estoy seguro: tu amor es mi vida."
   },
   {
     id: 6,
-    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto6.jpeg",
+    url: "/love-galaxy-netlify/client/public/fotos/foto6.jpeg",
     title: "Caminos juntos",
     quote: "Te amo por tu mirada que mira y siembra futuro."
   }

@@ -31,7 +31,7 @@ const DEFAULT_PHOTOS = [
   },
   {
     id: 2,
-    url: "/love-galaxy-netlify/client/public/fotos/foto2.jpeg",
+    url: "/love-galaxy/client/public/fotos/fotos2.jpg",
     title: "Miradas que hablan",
     quote: "Te quiero como para escuchar tu risa toda la noche."
   },

@@ -25,37 +25,37 @@ const BENEDETTI_QUOTES = [
 const DEFAULT_PHOTOS = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=800",
+    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto1.jpeg",
     title: "Manos entrelazadas",
     quote: "Aprender cómo sos, quererte como sos."
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=800",
+    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto2.jpeg",
     title: "Miradas que hablan",
     quote: "Te quiero como para escuchar tu risa toda la noche."
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800",
+    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto3.jpeg",
     title: "Tu sonrisa",
     quote: "Mi estrategia es que por fin me necesites."
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
+    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto4.jpeg",
     title: "Bajo las estrellas",
     quote: "Cinco minutos bastan para vivir una vida entera."
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800",
+    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto5.jpeg",
     title: "Abrazo cálido",
     quote: "De dos cosas estoy seguro: tu amor es mi vida."
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=800",
+    url: "C:\Users\e1981\OneDrive\Escritorio\more\love-galaxy-netlify\love-galaxy\client\public\fotos\foto6.jpeg",
     title: "Caminos juntos",
     quote: "Te amo por tu mirada que mira y siembra futuro."
   }
@@ -316,47 +316,21 @@ export default function Home() {
               />
             </div>
 
-            {/* Interfaz de la Galaxia (Encabezado y controles) */}
-            <div className="relative z-10 p-6 flex justify-between items-start bg-gradient-to-b from-black/80 via-black/40 to-transparent">
-              <div>
-                <h2 className="text-xl md:text-3xl font-serif font-bold text-pink-300 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">
-                  <MessageCircleHeart className="w-6 h-6 md:w-8 md:h-8 text-pink-500 animate-pulse" />
-                  Nuestra Galaxia de Amor
+            {/* UI minimalista */}
+            <div className="relative z-10 pointer-events-none flex flex-col justify-between h-full p-6">
+              <div className="text-center">
+                <h2 className="text-2xl md:text-4xl font-bold font-serif tracking-widest text-pink-400" style={{ textShadow: "0 0 12px rgba(255,105,180,0.9)" }}>
+                  ✦ GALAXIA DE AMOR ✦
                 </h2>
-                <p className="text-xs md:text-sm text-pink-100/70 mt-1 max-w-md">
-                  Haz clic en las esferas flotantes de la galaxia para ver tus fotos a detalle y leer versos románticos.
-                </p>
               </div>
-              <div className="flex gap-2">
-                <Button 
-                  onClick={() => setShowConfig(true)}
-                  className="bg-pink-600/20 border border-pink-500/30 hover:bg-pink-600/40 text-pink-200 text-xs md:text-sm px-4 py-2 rounded-full transition-all"
-                >
-                  Personalizar Fotos 📸
-                </Button>
-                <Button 
-                  onClick={() => setStage("welcome")}
-                  variant="outline"
-                  className="bg-white/5 border-white/20 hover:bg-white/10 text-white text-xs md:text-sm px-4 py-2 rounded-full"
-                >
-                  Volver
-                </Button>
+              <div className="text-center">
+                <p className="text-sm tracking-widest text-pink-300/60 font-serif">toca las esferas para descubrir un momento ♡</p>
               </div>
             </div>
-
-            {/* Footer con poema aleatorio de Benedetti que cambia */}
-            <div className="relative z-10 p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent text-center">
-              <div className="max-w-2xl mx-auto">
-                <motion.p 
-                  key={selectedPhoto ? selectedPhoto.id : "default"}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-sm md:text-lg italic font-serif text-pink-100 drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)]"
-                >
-                  "{selectedPhoto ? selectedPhoto.quote : BENEDETTI_QUOTES[0]}"
-                </motion.p>
-                <p className="text-xs text-pink-400 mt-2 font-medium tracking-wider">— Mario Benedetti</p>
-              </div>
+            {/* Botones flotantes */}
+            <div className="absolute top-4 right-4 z-20 flex gap-2">
+              <Button onClick={() => setShowConfig(true)} className="bg-pink-600/20 border border-pink-500/30 hover:bg-pink-600/40 text-pink-200 text-xs px-3 py-1.5 rounded-full">📸 Fotos</Button>
+              <Button onClick={() => setStage("welcome")} variant="outline" className="bg-white/5 border-white/20 hover:bg-white/10 text-white text-xs px-3 py-1.5 rounded-full">← Volver</Button>
             </div>
 
             {/* PANEL DE PERSONALIZACIÓN */}

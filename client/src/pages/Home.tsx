@@ -25,37 +25,37 @@ const BENEDETTI_QUOTES = [
 const DEFAULT_PHOTOS = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=800",
+    url: "/love-galaxy-netlify/client/public/fotos/foto1.jpeg",
     title: "Manos entrelazadas",
     quote: "Aprender cómo sos, quererte como sos."
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=800",
+    url: "/love-galaxy-netlify/client/public/fotos/foto2.jpeg",
     title: "Miradas que hablan",
     quote: "Te quiero como para escuchar tu risa toda la noche."
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800",
+    url: "/love-galaxy-netlify/client/public/fotos/foto3.jpeg",
     title: "Tu sonrisa",
     quote: "Mi estrategia es que por fin me necesites."
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
+    url: "/love-galaxy-netlify/client/public/fotos/foto4.jpeg",
     title: "Bajo las estrellas",
     quote: "Cinco minutos bastan para vivir una vida entera."
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800",
+    url: "/love-galaxy-netlify/client/public/fotos/foto5.jpeg",
     title: "Abrazo cálido",
     quote: "De dos cosas estoy seguro: tu amor es mi vida."
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=800",
+    url: "/love-galaxy-netlify/client/public/fotos/foto6.jpeg",
     title: "Caminos juntos",
     quote: "Te amo por tu mirada que mira y siembra futuro."
   }

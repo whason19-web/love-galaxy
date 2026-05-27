@@ -45,12 +45,14 @@ export default function YouTubePlayer({
             fs: 0,
             playsinline: 1,
             loop: loop ? 1 : 0,
+            start: 40,
             playlist: loop ? videoId : undefined,
           },
           events: {
             onReady: (event: any) => {
               // Reproducir automáticamente
               if (autoplay) {
+                event.target.seekTo(40, true);
                 event.target.playVideo();
               }
               // Ajustar volumen

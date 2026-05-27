@@ -21,41 +21,97 @@ const BENEDETTI_QUOTES = [
   "No sé tu nombre, sólo sé la mirada con que me lo dices."
 ];
 
-// Fotos por defecto (enlaces de Unsplash con temática de amor, parejas, estrellas, momentos tiernos)
+const getPublicAssetUrl = (path: string) => {
+  if (!path) return "";
+  if (/^(https?:)?\/\//i.test(path) || path.startsWith("data:")) return path;
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+};
+
+const normalizePhotoUrl = (url: string) => {
+  if (!url) return "";
+
+  const raw = url.trim();
+  if (raw.startsWith("data:")) return raw;
+
+  const cleanedFromAbsolute = (() => {
+    if (!/^(https?:)?\/\//i.test(raw)) return null;
+
+    try {
+      const parsed = new URL(raw, window.location.origin);
+      return parsed.pathname
+        .replace(/^\/?love-galaxy(?:-netlify)?\/client\/public\//, "")
+        .replace(/^\/?client\/public\//, "")
+        .replace(/^\/?fotos\//, "fotos/");
+    } catch {
+      return null;
+    }
+  })();
+
+  if (cleanedFromAbsolute) {
+    return getPublicAssetUrl(cleanedFromAbsolute);
+  }
+
+  if (/^(https?:)?\/\//i.test(raw)) return raw;
+
+  const cleaned = raw
+    .replace(/^\/?love-galaxy(?:-netlify)?\/client\/public\//, "")
+    .replace(/^\/?client\/public\//, "")
+    .replace(/^\/?fotos\//, "fotos/");
+
+  return getPublicAssetUrl(cleaned);
+};
+
+const normalizePhoto = (photo: { id: number; url: string; title: string; quote: string }) => ({
+  ...photo,
+  url: normalizePhotoUrl(photo.url),
+});
+
+const normalizeSavedPhotos = (value: unknown) => {
+  if (!Array.isArray(value)) return DEFAULT_PHOTOS.map(normalizePhoto);
+
+  return value
+    .filter((photo): photo is { id: number; url: string; title: string; quote: string } =>
+      typeof photo === "object" && photo !== null &&
+      "url" in photo && typeof (photo as any).url === "string"
+    )
+    .map(normalizePhoto);
+};
+
+// Fotos por defecto (cargadas desde la carpeta pública del proyecto)
 const DEFAULT_PHOTOS = [
   {
     id: 1,
-    url: "client/public/fotos/foto1.jpeg",
+    url: getPublicAssetUrl("fotos/foto1.jpeg"),
     title: "Manos entrelazadas",
     quote: "Aprender cómo sos, quererte como sos."
   },
   {
     id: 2,
-    url: "/love-galaxy/client/public/fotos/fotos2.jpg",
+    url: getPublicAssetUrl("fotos/foto2.jpeg"),
     title: "Miradas que hablan",
     quote: "Te quiero como para escuchar tu risa toda la noche."
   },
   {
     id: 3,
-    url: "/love-galaxy-netlify/client/public/fotos/foto3.jpeg",
+    url: getPublicAssetUrl("fotos/foto3.jpeg"),
     title: "Tu sonrisa",
     quote: "Mi estrategia es que por fin me necesites."
   },
   {
     id: 4,
-    url: "/love-galaxy-netlify/client/public/fotos/foto4.jpeg",
+    url: getPublicAssetUrl("fotos/foto4.jpeg"),
     title: "Bajo las estrellas",
     quote: "Cinco minutos bastan para vivir una vida entera."
   },
   {
     id: 5,
-    url: "/love-galaxy-netlify/client/public/fotos/foto5.jpeg",
+    url: getPublicAssetUrl("fotos/foto5.jpeg"),
     title: "Abrazo cálido",
     quote: "De dos cosas estoy seguro: tu amor es mi vida."
   },
   {
     id: 6,
-    url: "/love-galaxy-netlify/client/public/fotos/foto6.jpeg",
+    url: getPublicAssetUrl("fotos/foto6.png"),
     title: "Caminos juntos",
     quote: "Te amo por tu mirada que mira y siembra futuro."
   }
@@ -68,8 +124,22 @@ export default function Home() {
   
   // Fotos de la galaxia (pueden ser personalizadas o por defecto)
   const [photos, setPhotos] = useState(() => {
-    const saved = localStorage.getItem("love_galaxy_photos");
-    return saved ? JSON.parse(saved) : DEFAULT_PHOTOS;
+    try {
+      const saved = localStorage.getItem("love_galaxy_photos");
+      const parsed = saved ? JSON.parse(saved) : DEFAULT_PHOTOS;
+      const normalized = normalizeSavedPhotos(parsed);
+
+      if (saved) {
+        const serialized = JSON.stringify(normalized);
+        if (serialized !== saved) {
+          localStorage.setItem("love_galaxy_photos", serialized);
+        }
+      }
+
+      return normalized;
+    } catch {
+      return DEFAULT_PHOTOS.map(normalizePhoto);
+    }
   });
   const [selectedPhoto, setSelectedPhoto] = useState<typeof DEFAULT_PHOTOS[0] | null>(null);
   
@@ -81,19 +151,19 @@ export default function Home() {
 
   // Guardar fotos en localStorage para persistencia
   useEffect(() => {
-    localStorage.setItem("love_galaxy_photos", JSON.stringify(photos));
+    localStorage.setItem("love_galaxy_photos", JSON.stringify(photos.map(normalizePhoto)));
   }, [photos]);
 
   const handleAddPhoto = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPhotoUrl || !newPhotoTitle || !newPhotoQuote) return;
 
-    const newPhoto = {
+    const newPhoto = normalizePhoto({
       id: Date.now(),
       url: newPhotoUrl,
       title: newPhotoTitle,
       quote: newPhotoQuote
-    };
+    });
 
     setPhotos([...photos, newPhoto]);
     setNewPhotoUrl("");
@@ -111,7 +181,7 @@ export default function Home() {
 
   const handleResetPhotos = () => {
     if (window.confirm("¿Seguro que deseas restaurar las fotos románticas por defecto?")) {
-      setPhotos(DEFAULT_PHOTOS);
+      setPhotos(DEFAULT_PHOTOS.map(normalizePhoto));
     }
   };
   
